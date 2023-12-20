@@ -1,7 +1,7 @@
 { lib, python311Packages, fetchFromGitHub, fetchgit }: 
 
 python311Packages.buildPythonPackage rec {
-  pname = "foxglove_websocket_pkg";
+  pname = "py_foxglove_websocket_pkg";
   version = "1.0.0";
   format="pyproject";
   src_repo = fetchgit {
