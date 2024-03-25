@@ -11,7 +11,11 @@
       py_foxglove_websocket_overlay = final: prev: {
         py_foxglove_websocket_pkg = final.callPackage ./default.nix { };
       };
-      my_overlays = [ py_foxglove_websocket_overlay ];
+      py_foxglove_proto_schemas_overlay = final: prev: {
+        py_foxglove_proto_schemas_pkg = final.callPackage ./foxglove.nix { };
+      };
+
+      my_overlays = [ py_foxglove_websocket_overlay py_foxglove_proto_schemas_overlay ];
       pkgs = import nixpkgs {
         system = "x86_64-linux";
         overlays = [ self.overlays.default ];
@@ -23,6 +27,7 @@
       packages.x86_64-linux =
         rec {
           py_foxglove_websocket_pkg = pkgs.py_foxglove_websocket_pkg ;
+          py_foxglove_proto_schemas_pkg = pkgs.py_foxglove_proto_schemas_pkg;
           default = py_foxglove_websocket_pkg ;
         };
       devShells.x86_64-linux.default =
